@@ -1,5 +1,10 @@
 import { connectDatabase } from './config/database.js';
-import app, { apiBaseUrl, port } from './index.js';
+import app from './index.js';
+
+const port = Number(process.env.PORT) || 8000;
+const apiBaseUrl = process.env.CODESPACE_NAME
+  ? `https://${process.env.CODESPACE_NAME}-8000.app.github.dev`
+  : `http://localhost:${port}`;
 
 async function startServer(): Promise<void> {
   try {

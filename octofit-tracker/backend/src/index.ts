@@ -1,5 +1,4 @@
 import express from 'express';
-import { connectDatabase } from './config/database.js';
 import { createApiRouter } from './routes.js';
 
 export const port = Number(process.env.PORT) || 8000;
