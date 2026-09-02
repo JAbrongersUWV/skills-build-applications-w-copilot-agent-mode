@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react'
-import { fetchCollection } from '../api.js'
+import { apiBaseUrl, fetchCollection } from '../api.js'
+
+const teamsEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/teams/`
+  : `${apiBaseUrl}/api/teams/`
 
 function Teams() {
   const [teams, setTeams] = useState([])
   const [status, setStatus] = useState('loading')
 
-  useEffect(() => { fetchCollection('teams').then((records) => { setTeams(records); setStatus('ready') }).catch(() => setStatus('error')) }, [])
+  useEffect(() => { fetchCollection(teamsEndpoint).then((records) => { setTeams(records); setStatus('ready') }).catch(() => setStatus('error')) }, [])
 
   return (
     <section className="page-section"><div className="section-heading"><div><span className="eyebrow">Train together</span><h1>Teams</h1></div><span className="count-badge">{teams.length} teams</span></div>

@@ -5,7 +5,10 @@ export const apiBaseUrl = codespaceName
   : 'http://localhost:8000'
 
 export async function fetchCollection(component) {
-  const response = await fetch(`${apiBaseUrl}/api/${component}/`)
+  const endpoint = component.startsWith('http')
+    ? component
+    : `${apiBaseUrl}/api/${component}/`
+  const response = await fetch(endpoint)
 
   if (!response.ok) {
     throw new Error(`Unable to load ${component}`)

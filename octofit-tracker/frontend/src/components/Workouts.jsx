@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react'
-import { fetchCollection } from '../api.js'
+import { apiBaseUrl, fetchCollection } from '../api.js'
+
+const workoutsEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/workouts/`
+  : `${apiBaseUrl}/api/workouts/`
 
 function Workouts() {
   const [workouts, setWorkouts] = useState([])
   const [status, setStatus] = useState('loading')
 
-  useEffect(() => { fetchCollection('workouts').then((records) => { setWorkouts(records); setStatus('ready') }).catch(() => setStatus('error')) }, [])
+  useEffect(() => { fetchCollection(workoutsEndpoint).then((records) => { setWorkouts(records); setStatus('ready') }).catch(() => setStatus('error')) }, [])
 
   return (
     <section className="page-section"><div className="section-heading"><div><span className="eyebrow">Personal library</span><h1>Workouts</h1></div><span className="count-badge">{workouts.length} sessions</span></div>

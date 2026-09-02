@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react'
-import { displayName, fetchCollection } from '../api.js'
+import { apiBaseUrl, displayName, fetchCollection } from '../api.js'
+
+const leaderboardEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/`
+  : `${apiBaseUrl}/api/leaderboard/`
 
 function Leaderboard() {
   const [leaders, setLeaders] = useState([])
   const [status, setStatus] = useState('loading')
 
   useEffect(() => {
-    fetchCollection('leaderboard')
+    fetchCollection(leaderboardEndpoint)
       .then((records) => { setLeaders(records); setStatus('ready') })
       .catch(() => setStatus('error'))
   }, [])

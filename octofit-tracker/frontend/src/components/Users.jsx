@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react'
-import { displayName, fetchCollection } from '../api.js'
+import { apiBaseUrl, displayName, fetchCollection } from '../api.js'
+
+const usersEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/users/`
+  : `${apiBaseUrl}/api/users/`
 
 function Users() {
   const [users, setUsers] = useState([])
   const [status, setStatus] = useState('loading')
 
-  useEffect(() => { fetchCollection('users').then((records) => { setUsers(records); setStatus('ready') }).catch(() => setStatus('error')) }, [])
+  useEffect(() => { fetchCollection(usersEndpoint).then((records) => { setUsers(records); setStatus('ready') }).catch(() => setStatus('error')) }, [])
 
   return (
     <section className="page-section"><div className="section-heading"><div><span className="eyebrow">Your training circle</span><h1>Users</h1></div><span className="count-badge">{users.length} athletes</span></div>
