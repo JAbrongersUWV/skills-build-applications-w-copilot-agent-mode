@@ -12,6 +12,7 @@
   "scripts": {
     "dev": "PORT=8000 tsx watch src/index.ts",
     "build": "tsc",
+    "seed": "tsx src/scripts/seed.ts",
     "start": "PORT=8000 node dist/index.js"
   }
 }
