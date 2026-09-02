@@ -10,9 +10,9 @@
     "typescript": "^7.0.2"
   },
   "scripts": {
-    "dev": "PORT=8000 tsx watch src/index.ts",
+    "dev": "PORT=8000 tsx watch src/server.ts",
     "build": "tsc",
     "seed": "tsx src/scripts/seed.ts",
-    "start": "PORT=8000 node dist/index.js"
+    "start": "PORT=8000 node dist/server.js"
   }
 }

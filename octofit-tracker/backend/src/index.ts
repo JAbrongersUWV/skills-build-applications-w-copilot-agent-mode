@@ -20,20 +20,4 @@ app.get('/api', (_request, response) => {
 
 app.use('/api', createApiRouter());
 
-async function startServer(): Promise<void> {
-  try {
-    await connectDatabase();
-    app.listen(port, () => {
-      console.log(`Octofit API listening at ${apiBaseUrl}`);
-    });
-  } catch (error) {
-    console.error('Unable to start Octofit API:', error);
-    process.exitCode = 1;
-  }
-}
-
-if (process.env.NODE_ENV !== 'test') {
-  void startServer();
-}
-
 export default app;
